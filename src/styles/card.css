@@ -1,0 +1,46 @@
+.link-card {
+  list-style: none;
+  display: flex;
+  padding: 1px;
+  background-color: #1a1a26;
+  background-image: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)));
+  background-size: 400%;
+  border-radius: var(--radius);
+  transition: background-position 0.6s ease;
+}
+
+.link-card > a {
+  width: 100%;
+  text-decoration: none;
+  line-height: 1.4;
+  padding: 1.25rem 1.5rem;
+  border-radius: calc(var(--radius) - 1px);
+  color: var(--fg);
+  background-color: var(--bg-elevated);
+  opacity: 0.95;
+}
+
+.link-card h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  transition: color 0.4s ease;
+}
+
+.link-card h2 span {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.link-card p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.link-card:is(:hover, :focus-within) {
+  background-position: 100%;
+}
+
+.link-card:is(:hover, :focus-within) h2 span {
+  transform: translateX(4px);
+}

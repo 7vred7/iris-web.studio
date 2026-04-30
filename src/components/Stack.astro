@@ -1,0 +1,90 @@
+---
+import '../styles/stack.css';
+
+const wpFeatures = [
+  'Built with Elementor Pro and other premium page builders',
+  'Visual editing — your team updates content without a developer',
+  'Performance-tuned: image optimization, caching, lazy loading',
+  'Hardened for SEO, security, and long-term maintenance',
+];
+
+const astroFeatures = [
+  'Static-first builds with sub-second loads',
+  'Open-source CMS: Strapi, Payload, or TinaCMS',
+  'AI-first workflow: Claude, MCP agents, automated drafts',
+  'Optimized for AI search — ChatGPT, Perplexity, Google AI Overviews',
+];
+---
+
+<section class="stack section" id="stack">
+  <div class="container">
+    <span class="section-eyebrow" data-reveal>two paths</span>
+    <h2 class="section-title" data-reveal data-reveal-delay="100">
+      Pick the stack <em>that fits</em>
+    </h2>
+    <p class="stack-intro" data-reveal data-reveal-delay="200">
+      Some teams need the familiar WordPress editor and the visual page builders they
+      already know. Others want the speed and AI-readiness of a modern static stack.
+      We build both — to the same studio standard.
+    </p>
+
+    <div class="stack-paths">
+      <!-- Path 01 — WordPress -->
+      <article class="path-card" data-reveal data-reveal-delay="300">
+        <header class="path-card-header">
+          <span class="path-card-number">Path 01</span>
+          <span class="path-card-tag tag-classic">Familiar</span>
+        </header>
+        <h3 class="path-card-title">WordPress, refined</h3>
+        <p class="path-card-lead">
+          For teams who want a familiar, visually-editable site they can update
+          themselves — built on WordPress with premium page builders and tuned for
+          real-world performance.
+        </p>
+        <ul class="path-card-list">
+          {wpFeatures.map((f) => <li>{f}</li>)}
+        </ul>
+        <footer class="path-card-footer">
+          <span class="path-card-best-for">Best for</span>
+          <span>Editorial teams, e-shops, content-heavy sites — anywhere visual editing matters</span>
+        </footer>
+      </article>
+
+      <!-- OR divider -->
+      <div class="path-divider" aria-hidden="true">
+        <span class="path-divider-circle">OR</span>
+      </div>
+
+      <!-- Path 02 — Astro + AI-first -->
+      <article class="path-card path-card-featured" data-reveal data-reveal-delay="450">
+        <header class="path-card-header">
+          <span class="path-card-number">Path 02</span>
+          <span class="path-card-tag tag-modern">AI-First</span>
+        </header>
+        <h3 class="path-card-title">Astro + AI-first</h3>
+        <p class="path-card-lead">
+          For teams who want the modern stack — fast, AI-ready, and future-proof.
+          Designed from the ground up to work with AI tools, AI search, and AI workflows.
+        </p>
+        <ul class="path-card-list">
+          {astroFeatures.map((f) => <li>{f}</li>)}
+        </ul>
+        <footer class="path-card-footer">
+          <span class="path-card-best-for">Best for</span>
+          <span>New builds, brand sites, marketing pages, anything where speed and discoverability matter</span>
+        </footer>
+      </article>
+    </div>
+
+    <!-- Shared standards across both paths -->
+    <div class="stack-standards" data-reveal data-reveal-delay="600">
+      <span class="stack-standards-label">Both paths ship with</span>
+      <ul class="stack-standards-list">
+        <li>Design-first thinking</li>
+        <li>90+ Lighthouse performance</li>
+        <li>Accessibility &amp; SEO baked in</li>
+        <li>Long-term support</li>
+      </ul>
+    </div>
+  </div>
+</section>

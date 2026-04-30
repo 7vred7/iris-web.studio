@@ -1,0 +1,80 @@
+.about {
+  background: var(--color-surface);
+}
+
+.about-grid {
+  display: grid;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.about-content .section-eyebrow {
+  text-align: left;
+}
+
+.about-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.about-content p {
+  font-size: 1.05rem;
+  color: var(--color-text-body);
+}
+
+.about-cta {
+  margin-top: 1rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow);
+}
+
+.stat-number {
+  display: block;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+  margin: 0;
+}
+
+.stat-label {
+  display: block;
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}

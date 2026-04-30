@@ -1,0 +1,26 @@
+---
+import '../styles/clients.css';
+
+const clients = [
+  { name: 'Mrii Marii' },
+  { name: 'Dreamway' },
+  { name: 'Paris SFF' },
+  { name: 'Vpevneni Kroky' },
+  { name: 'uho.one' },
+];
+---
+
+<section class="clients section">
+  <div class="container">
+    <span class="section-eyebrow" data-reveal>trusted by</span>
+    <h2 class="section-title" data-reveal data-reveal-delay="100">Clients we've worked with</h2>
+
+    <ul class="clients-grid">
+      {clients.map((c, i) => (
+        <li class="client-logo" data-reveal data-reveal-delay={200 + i * 80}>
+          <span>{c.name}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

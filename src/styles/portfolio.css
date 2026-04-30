@@ -1,0 +1,237 @@
+.portfolio {
+  background: var(--color-bg);
+}
+
+/* ---------- Filters ---------- */
+.portfolio-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 2rem 0 3.5rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  transition: all 0.3s var(--ease-out-quart);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-violet) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.filter-btn:hover {
+  color: var(--color-text);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.filter-btn.is-active {
+  color: #fff;
+  border-color: transparent;
+}
+
+.filter-btn.is-active::before {
+  opacity: 1;
+}
+
+/* ---------- Grid ---------- */
+.portfolio-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 1.5rem;
+  perspective: 1200px;
+}
+
+.portfolio-item.is-hidden {
+  display: none;
+}
+
+/* ---------- Tilt card ---------- */
+.portfolio-card {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  transition: transform 0.4s var(--ease-out-quart);
+  transform-style: preserve-3d;
+  /* --rx and --ry are set by JS on mousemove */
+  transform:
+    perspective(1200px)
+    rotateX(var(--ry, 0deg))
+    rotateY(var(--rx, 0deg));
+}
+
+.portfolio-card:hover {
+  color: var(--color-text);
+}
+
+.portfolio-tilt-inner {
+  position: relative;
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-tilt-inner {
+  border-color: rgba(129, 140, 248, 0.4);
+  box-shadow:
+    0 20px 60px rgba(99, 102, 241, 0.25),
+    0 0 0 1px rgba(129, 140, 248, 0.15);
+}
+
+/* Decorative shine that moves across the card on hover */
+.portfolio-tilt-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.6s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.portfolio-card:hover .portfolio-tilt-inner::before {
+  background-position: -100% 0;
+}
+
+/* ---------- Thumbnail with palette variants ---------- */
+.portfolio-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-card[data-palette='a'] .portfolio-thumb { background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); }
+.portfolio-card[data-palette='b'] .portfolio-thumb { background: linear-gradient(135deg, #1e3a8a 0%, #5b21b6 100%); }
+.portfolio-card[data-palette='c'] .portfolio-thumb { background: linear-gradient(135deg, #831843 0%, #4c1d95 100%); }
+.portfolio-card[data-palette='d'] .portfolio-thumb { background: linear-gradient(135deg, #064e3b 0%, #155e75 100%); }
+.portfolio-card[data-palette='e'] .portfolio-thumb { background: linear-gradient(135deg, #7c2d12 0%, #831843 100%); }
+
+/* Soft animated blob inside thumbnail */
+.portfolio-thumb-blob {
+  position: absolute;
+  width: 60%;
+  height: 70%;
+  border-radius: 50%;
+  filter: blur(50px);
+  background: rgba(255, 255, 255, 0.18);
+  top: 20%;
+  left: 25%;
+  transition: transform 0.8s var(--ease-out-quart);
+}
+
+.portfolio-card:hover .portfolio-thumb-blob {
+  transform: scale(1.15) translate(-10%, 5%);
+}
+
+.portfolio-thumb-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(180deg, transparent, black 30%, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, black 30%, black 70%, transparent);
+}
+
+.portfolio-thumb-letter {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s var(--ease-out-quart);
+}
+
+.portfolio-card:hover .portfolio-thumb-letter {
+  transform: scale(1.1);
+}
+
+.portfolio-thumb-domain {
+  position: absolute;
+  bottom: 0.875rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+
+/* ---------- Info area ---------- */
+.portfolio-info {
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.portfolio-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.portfolio-description {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  min-height: 3rem;
+}
+
+.portfolio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-primary-light);
+  transition: gap 0.3s var(--ease-out-quart), color 0.2s ease;
+}
+
+.portfolio-link svg {
+  transition: transform 0.3s var(--ease-out-quart);
+}
+
+.portfolio-card:hover .portfolio-link {
+  gap: 0.75rem;
+  color: var(--color-primary);
+}
+
+.portfolio-card:hover .portfolio-link svg {
+  transform: translate(2px, -2px);
+}

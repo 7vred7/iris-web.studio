@@ -1,0 +1,47 @@
+---
+import '../styles/menu.css';
+
+const links = [
+  { href: '#portfolio', label: 'Portfolio', number: '01' },
+  { href: '#about', label: 'About', number: '02' },
+  { href: '#services', label: 'Services', number: '03' },
+  { href: '#contact', label: 'Contact', number: '04' },
+];
+---
+
+<nav class="menu-overlay" aria-hidden="true" data-menu>
+  <div class="menu-backdrop"></div>
+
+  <button class="menu-close" aria-label="Close menu" data-menu-close>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="menu-content">
+    <ul class="menu-nav">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} data-menu-link>
+            <span class="menu-link-number">{link.number}</span>
+            <span class="menu-link-label">{link.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="menu-footer">
+      <div class="menu-footer-block">
+        <span class="menu-footer-label">Email</span>
+        <a href="mailto:7vred7@gmail.com">7vred7@gmail.com</a>
+      </div>
+      <div class="menu-footer-block">
+        <span class="menu-footer-label">Phone</span>
+        <a href="tel:+380962082294">+38 096 208 22 94</a>
+      </div>
+      <div class="menu-footer-block">
+        <span class="menu-footer-label">Studio</span>
+        <span>Kyiv, Ukraine</span>
+      </div>
+    </div>
+  </div>
+</nav>

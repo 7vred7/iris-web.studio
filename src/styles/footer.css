@@ -1,0 +1,90 @@
+.site-footer {
+  background: #050510;
+  color: #cbd5e1;
+  padding-top: 4rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-inner {
+  display: grid;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.footer-logo:hover .footer-logo-img {
+  --logo-color: var(--color-primary-light);
+}
+
+/* Same mask technique as header — keeps logo color editable in one spot */
+.footer-logo-img {
+  --logo-color: #ffffff;
+
+  display: block;
+  width: 160px;
+  height: 50px;
+
+  background-color: var(--logo-color);
+  -webkit-mask: url('/logo.png') left center / contain no-repeat;
+  mask: url('/logo.png') left center / contain no-repeat;
+
+  transition: background-color 0.25s ease;
+}
+
+.footer-tagline {
+  color: #7a7a8c;
+  font-size: 0.95rem;
+  max-width: 320px;
+  margin: 0;
+}
+
+.footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.footer-nav a,
+.footer-contact a {
+  color: #b8b8c8;
+  font-size: 0.95rem;
+}
+
+.footer-nav a:hover,
+.footer-contact a:hover {
+  color: var(--color-primary-light);
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  font-size: 0.95rem;
+  color: #b8b8c8;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--color-border);
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  color: #6e6e80;
+}
+
+.footer-bottom p {
+  margin: 0;
+  text-align: center;
+  color: inherit;
+}

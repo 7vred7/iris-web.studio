@@ -1,0 +1,55 @@
+---
+import '../styles/portfolio.css';
+
+const projects = [
+  {
+    title: 'Paris Short Film Festival',
+    category: 'web',
+    href: 'https://mriimarii.com/',
+    description: 'Festival website with submissions, schedule, and media gallery.',
+  },
+  {
+    title: 'Mrii Marii',
+    category: 'web',
+    href: 'https://mriimarii.com/',
+    description: 'Production company portfolio and project showcase.',
+  },
+  {
+    title: 'Dreamway',
+    category: 'edu',
+    href: 'https://dreamway-study.com/',
+    description: 'Study-abroad consultancy with multi-step inquiry flow.',
+  },
+];
+---
+
+<section class="portfolio section" id="portfolio">
+  <div class="container">
+    <span class="section-eyebrow" data-reveal>our</span>
+    <h2 class="section-title" data-reveal data-reveal-delay="100">Websites</h2>
+
+    <div class="portfolio-filters" data-portfolio-filters data-reveal data-reveal-delay="200">
+      <button class="filter-btn is-active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="edu">Education</button>
+    </div>
+
+    <ul class="portfolio-grid" data-portfolio-grid>
+      {projects.map((p, i) => (
+        <li class="portfolio-item" data-category={p.category} style={`--i:${i}`} data-reveal data-reveal-delay={300 + i * 100}>
+          <a href={p.href} target="_blank" rel="noopener noreferrer" class="portfolio-card">
+            <div class="portfolio-thumb">
+              <span class="portfolio-thumb-letter">{p.title.charAt(0)}</span>
+              <div class="portfolio-thumb-glow"></div>
+            </div>
+            <div class="portfolio-info">
+              <h3 class="portfolio-title">{p.title}</h3>
+              <p class="portfolio-description">{p.description}</p>
+              <span class="portfolio-link">Visit site &rarr;</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

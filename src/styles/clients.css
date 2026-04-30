@@ -1,0 +1,82 @@
+.clients {
+  background: var(--color-surface);
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.clients-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-text);
+}
+
+/* ---------- Infinite marquee ---------- */
+.clients-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 3rem;
+  animation: clientsScroll 40s linear infinite;
+  padding-right: 3rem;
+}
+
+.clients-marquee:hover .clients-track {
+  animation-play-state: paused;
+}
+
+.client-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  min-width: 180px;
+  padding: 0 1.5rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.client-logo:hover {
+  color: var(--color-primary-light);
+  border-color: var(--color-primary);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+@keyframes clientsScroll {
+  to { transform: translateX(calc(-100% / 3)); }
+}
+
+/* Edge fades to soften marquee in/out */
+.clients-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.clients-fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--color-surface), transparent);
+}
+
+.clients-fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--color-surface), transparent);
+}

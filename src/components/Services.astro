@@ -1,0 +1,55 @@
+---
+import '../styles/services.css';
+
+const services = [
+  {
+    title: 'Development',
+    icon: '⚡',
+    items: ['UI/UX', 'Business website', 'E-shop', 'Landing Page', 'Turnkey website'],
+  },
+  {
+    title: 'Design',
+    icon: '◇',
+    items: [
+      'Logo development',
+      'Corporate identity',
+      'Usability audit',
+      'Site design',
+      'Selection of fonts & colors',
+    ],
+  },
+  {
+    title: 'Marketing',
+    icon: '↗',
+    items: [
+      'SMM promotion',
+      'Texts writing',
+      'Google Ads',
+      'Advertising campaigns review',
+      'PPC advertising',
+    ],
+  },
+];
+---
+
+<section class="services section" id="services">
+  <div class="container">
+    <span class="section-eyebrow" data-reveal>what we do</span>
+    <h2 class="section-title" data-reveal data-reveal-delay="100">Services</h2>
+    <p class="services-intro" data-reveal data-reveal-delay="200">
+      Three pillars that cover the full lifecycle of building and growing a brand online.
+    </p>
+
+    <div class="services-grid">
+      {services.map((s, i) => (
+        <article class="service-card" data-reveal data-reveal-delay={300 + i * 120}>
+          <div class="service-icon" aria-hidden="true">{s.icon}</div>
+          <h3 class="service-title">{s.title}</h3>
+          <ul class="service-list">
+            {s.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

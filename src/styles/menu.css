@@ -1,0 +1,213 @@
+/* Fullscreen takeover menu */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.menu-overlay.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Backdrop with gradient mesh */
+.menu-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.25), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(192, 132, 252, 0.2), transparent 50%),
+    rgba(8, 8, 16, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+
+.menu-overlay.is-open .menu-backdrop {
+  opacity: 1;
+}
+
+/* Close button */
+.menu-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.8) rotate(-90deg);
+  transition: opacity 0.4s ease 0.2s, transform 0.4s var(--ease-out) 0.2s, background 0.2s ease;
+}
+
+.menu-overlay.is-open .menu-close {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.menu-close:hover {
+  background: rgba(129, 140, 248, 0.18);
+  border-color: rgba(129, 140, 248, 0.4);
+}
+
+.menu-close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 1.5px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.menu-close span:nth-child(1) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.menu-close span:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Menu content layout */
+.menu-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6rem 2.5rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Big nav links with stagger animation */
+.menu-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-nav li {
+  overflow: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.menu-nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 9vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+
+  padding: 0.5rem 0;
+  transform: translateY(110%);
+  transition: transform 0.85s var(--ease-out), color 0.3s ease;
+
+  position: relative;
+}
+
+.menu-overlay.is-open .menu-nav li:nth-child(1) a { transition-delay: 0.15s; }
+.menu-overlay.is-open .menu-nav li:nth-child(2) a { transition-delay: 0.22s; }
+.menu-overlay.is-open .menu-nav li:nth-child(3) a { transition-delay: 0.29s; }
+.menu-overlay.is-open .menu-nav li:nth-child(4) a { transition-delay: 0.36s; }
+
+.menu-overlay.is-open .menu-nav a {
+  transform: translateY(0);
+}
+
+.menu-link-number {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  align-self: flex-start;
+  padding-top: 0.5rem;
+  font-feature-settings: 'tnum';
+}
+
+.menu-link-label {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text) 100%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.5s var(--ease-out);
+}
+
+.menu-nav a:hover .menu-link-label {
+  background-image: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent-violet) 50%, var(--color-accent-pink) 100%);
+  background-position: 0 0;
+}
+
+/* Footer info inside menu */
+.menu-footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.5s, transform 0.6s var(--ease-out) 0.5s;
+}
+
+.menu-overlay.is-open .menu-footer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-footer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.menu-footer-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+}
+
+.menu-footer a,
+.menu-footer span {
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.menu-footer a:hover {
+  color: var(--color-primary-light);
+}
+
+@media (max-width: 600px) {
+  .menu-content {
+    padding: 5rem 1.5rem 2rem;
+  }
+
+  .menu-close {
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+  }
+}

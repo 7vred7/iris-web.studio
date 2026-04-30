@@ -1,0 +1,47 @@
+---
+import '../styles/contact.css';
+---
+
+<section class="contact section" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <span class="section-eyebrow" data-reveal>contact</span>
+      <h2 class="contact-title" data-reveal data-reveal-delay="100">Let's build something good</h2>
+      <p class="contact-lead" data-reveal data-reveal-delay="200">
+        Tell us about your project and we'll get back to you within one business day.
+      </p>
+
+      <ul class="contact-list" data-reveal data-reveal-delay="300">
+        <li>
+          <span class="contact-label">Email</span>
+          <a href="mailto:7vred7@gmail.com">7vred7@gmail.com</a>
+        </li>
+        <li>
+          <span class="contact-label">Phone</span>
+          <a href="tel:+380962082294">+38 096 208 22 94</a>
+        </li>
+        <li>
+          <span class="contact-label">Location</span>
+          <span>Kyiv, Ukraine</span>
+        </li>
+      </ul>
+    </div>
+
+    <form class="contact-form" data-contact-form data-reveal data-reveal-delay="200">
+      <div class="form-row">
+        <label for="name" class="sr-only">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required />
+      </div>
+      <div class="form-row">
+        <label for="email" class="sr-only">Email</label>
+        <input id="email" name="email" type="email" placeholder="Your email" required />
+      </div>
+      <div class="form-row">
+        <label for="message" class="sr-only">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell us about your project" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary contact-submit">Let's Work Together</button>
+      <p class="form-note" data-form-note></p>
+    </form>
+  </div>
+</section>
