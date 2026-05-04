@@ -3,7 +3,10 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://iris-web.studio',
+  // Production URL — used for sitemap, canonical URLs, and OG images.
+  // Update to your real domain once you point one to GitHub Pages.
+  site: 'https://7vred7.github.io',
+  base: '/iris-web.studio',
 
   integrations: [
     sitemap({
