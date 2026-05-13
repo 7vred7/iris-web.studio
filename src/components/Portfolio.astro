@@ -3,22 +3,40 @@ import '../styles/portfolio.css';
 
 const projects = [
   {
-    title: 'Paris Short Film Festival',
-    category: 'web',
-    href: 'https://mriimarii.com/',
-    description: 'Festival website with submissions, schedule, and media gallery.',
-  },
-  {
-    title: 'Mrii Marii',
-    category: 'web',
-    href: 'https://mriimarii.com/',
-    description: 'Production company portfolio and project showcase.',
-  },
-  {
-    title: 'Dreamway',
-    category: 'edu',
+    title: 'Dreamway to Korea',
+    category: 'wordpress',
     href: 'https://dreamway-study.com/',
-    description: 'Study-abroad consultancy with multi-step inquiry flow.',
+    description:
+      'Educational agency for Korean university admissions — language courses, student visas, and full application support.',
+    image:
+      'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdreamway-study.com%2F?w=1600&h=1000',
+  },
+  {
+    title: 'Global Cars Korea',
+    category: 'wordpress',
+    href: 'https://globalcarskorea.com/',
+    description:
+      'Used car export from South Korea to Europe and worldwide — sourcing, inspection, and logistics handled end-to-end.',
+    image:
+      'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fglobalcarskorea.com%2F?w=1600&h=1000',
+  },
+  {
+    title: 'Long Island Tax Resolution',
+    category: 'wordpress',
+    href: 'https://longislandtaxresolution.com/',
+    description:
+      'IRS tax resolution and representation firm serving clients across Long Island, New York.',
+    image:
+      'https://s.wordpress.com/mshots/v1/https%3A%2F%2Flongislandtaxresolution.com%2F?w=1600&h=1000',
+  },
+  {
+    title: 'Hypnotherapy — Design Directions',
+    category: 'astro',
+    href: 'https://7vred7.github.io/hypnotherapy-demo/',
+    description:
+      'Three landing page design directions for a hypnotherapy practice. Built with Astro, deployed on GitHub Pages.',
+    image:
+      'https://s.wordpress.com/mshots/v1/https%3A%2F%2F7vred7.github.io%2Fhypnotherapy-demo%2F?w=1600&h=1000',
   },
 ];
 ---
@@ -28,18 +46,43 @@ const projects = [
     <span class="section-eyebrow" data-reveal>our</span>
     <h2 class="section-title" data-reveal data-reveal-delay="100">Websites</h2>
 
-    <div class="portfolio-filters" data-portfolio-filters data-reveal data-reveal-delay="200">
+    <div
+      class="portfolio-filters"
+      data-portfolio-filters
+      data-reveal
+      data-reveal-delay="200"
+    >
       <button class="filter-btn is-active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="web">Web</button>
-      <button class="filter-btn" data-filter="edu">Education</button>
+      <button class="filter-btn" data-filter="wordpress">WordPress</button>
+      <button class="filter-btn" data-filter="astro">Astro</button>
     </div>
 
     <ul class="portfolio-grid" data-portfolio-grid>
       {projects.map((p, i) => (
-        <li class="portfolio-item" data-category={p.category} style={`--i:${i}`} data-reveal data-reveal-delay={300 + i * 100}>
-          <a href={p.href} target="_blank" rel="noopener noreferrer" class="portfolio-card">
+        <li
+          class="portfolio-item"
+          data-category={p.category}
+          style={`--i:${i}`}
+          data-reveal
+          data-reveal-delay={300 + i * 100}
+        >
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portfolio-card"
+          >
             <div class="portfolio-thumb">
-              <span class="portfolio-thumb-letter">{p.title.charAt(0)}</span>
+              {p.image ? (
+                <img
+                  src={p.image}
+                  alt={p.title + ' — cover'}
+                  loading="lazy"
+                  class="portfolio-thumb-img"
+                />
+              ) : (
+                <span class="portfolio-thumb-letter">{p.title.charAt(0)}</span>
+              )}
               <div class="portfolio-thumb-glow"></div>
             </div>
             <div class="portfolio-info">
