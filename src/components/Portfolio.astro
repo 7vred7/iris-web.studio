@@ -1,44 +1,57 @@
 ---
 import '../styles/portfolio.css';
 
+// Base URL prefix — resolves to "/iris-web.studio/" in production,
+// "/" in dev. Required because the site deploys to a sub-path on GitHub Pages.
+const base = import.meta.env.BASE_URL;
+
 const projects = [
   {
     title: 'Dreamway to Korea',
+    domain: 'dreamway-study.com',
     category: 'wordpress',
+    palette: 'c', // violet
     href: 'https://dreamway-study.com/',
     description:
       'Educational agency for Korean university admissions — language courses, student visas, and full application support.',
-    image:
-      'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdreamway-study.com%2F?w=1600&h=1000',
+    image: `${base}portfolio/dreamway.jpg`,
   },
   {
     title: 'Global Cars Korea',
+    domain: 'globalcarskorea.com',
     category: 'wordpress',
+    palette: 'b', // blue
     href: 'https://globalcarskorea.com/',
     description:
       'Used car export from South Korea to Europe and worldwide — sourcing, inspection, and logistics handled end-to-end.',
-    image:
-      'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fglobalcarskorea.com%2F?w=1600&h=1000',
+    image: `${base}portfolio/globalcars.jpg`,
   },
   {
     title: 'Long Island Tax Resolution',
+    domain: 'longislandtaxresolution.com',
     category: 'wordpress',
+    palette: 'd', // emerald
     href: 'https://longislandtaxresolution.com/',
     description:
       'IRS tax resolution and representation firm serving clients across Long Island, New York.',
-    image:
-      'https://s.wordpress.com/mshots/v1/https%3A%2F%2Flongislandtaxresolution.com%2F?w=1600&h=1000',
+    image: `${base}portfolio/litax.jpg`,
   },
   {
     title: 'Hypnotherapy — Design Directions',
+    domain: '7vred7.github.io',
     category: 'astro',
+    palette: 'a', // pink
     href: 'https://7vred7.github.io/hypnotherapy-demo/',
     description:
       'Three landing page design directions for a hypnotherapy practice. Built with Astro, deployed on GitHub Pages.',
-    image:
-      'https://s.wordpress.com/mshots/v1/https%3A%2F%2F7vred7.github.io%2Fhypnotherapy-demo%2F?w=1600&h=1000',
+    image: `${base}portfolio/hypnotherapy.jpg`,
   },
 ];
+
+const stackLabel = {
+  wordpress: 'WordPress',
+  astro: 'Astro',
+};
 ---
 
 <section class="portfolio section" id="portfolio">
@@ -71,24 +84,31 @@ const projects = [
             target="_blank"
             rel="noopener noreferrer"
             class="portfolio-card"
+            data-palette={p.palette}
           >
-            <div class="portfolio-thumb">
-              {p.image ? (
+            <div class="portfolio-tilt-inner">
+              <div class="portfolio-thumb">
                 <img
                   src={p.image}
                   alt={p.title + ' — cover'}
                   loading="lazy"
                   class="portfolio-thumb-img"
                 />
-              ) : (
-                <span class="portfolio-thumb-letter">{p.title.charAt(0)}</span>
-              )}
-              <div class="portfolio-thumb-glow"></div>
-            </div>
-            <div class="portfolio-info">
-              <h3 class="portfolio-title">{p.title}</h3>
-              <p class="portfolio-description">{p.description}</p>
-              <span class="portfolio-link">Visit site &rarr;</span>
+                <div class="portfolio-thumb-overlay" aria-hidden="true"></div>
+                <span class="portfolio-thumb-badge">{stackLabel[p.category]}</span>
+                <span class="portfolio-thumb-domain">{p.domain}</span>
+              </div>
+              <div class="portfolio-info">
+                <h3 class="portfolio-title">{p.title}</h3>
+                <p class="portfolio-description">{p.description}</p>
+                <span class="portfolio-link">
+                  Visit site
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7"></path>
+                    <path d="M7 7h10v10"></path>
+                  </svg>
+                </span>
+              </div>
             </div>
           </a>
         </li>
