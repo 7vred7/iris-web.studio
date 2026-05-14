@@ -4,10 +4,10 @@ import { Image } from 'astro:assets';
 
 // Imported as ES modules so Astro can process them at build time:
 // auto-resize, convert to WebP, generate srcset, lazy-load.
-import dreamwayImg from '../assets/portfolio/dreamway.jpg';
-import globalcarsImg from '../assets/portfolio/globalcars.jpg';
-import litaxImg from '../assets/portfolio/litax.jpg';
-import hypnotherapyImg from '../assets/portfolio/hypnotherapy.jpg';
+import dreamwayImg from '../assets/portfolio/dreamway.png';
+import globalcarsImg from '../assets/portfolio/globalcars.png';
+import litaxImg from '../assets/portfolio/litax.png';
+import hypnotherapyImg from '../assets/portfolio/hypnotherapy.png';
 
 const projects = [
   {
@@ -99,7 +99,8 @@ const stackLabel = {
                   sizes="(min-width: 1100px) 540px, (min-width: 700px) 90vw, 100vw"
                   format="webp"
                   quality={80}
-                  loading="lazy"
+                  loading={i < 2 ? 'eager' : 'lazy'}
+                  decoding="async"
                   class="portfolio-thumb-img"
                 />
                 <div class="portfolio-thumb-overlay" aria-hidden="true"></div>
