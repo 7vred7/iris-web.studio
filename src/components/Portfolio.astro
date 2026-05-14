@@ -1,9 +1,13 @@
 ---
 import '../styles/portfolio.css';
+import { Image } from 'astro:assets';
 
-// Base URL prefix — resolves to "/iris-web.studio/" in production,
-// "/" in dev. Required because the site deploys to a sub-path on GitHub Pages.
-const base = import.meta.env.BASE_URL;
+// Imported as ES modules so Astro can process them at build time:
+// auto-resize, convert to WebP, generate srcset, lazy-load.
+import dreamwayImg from '../assets/portfolio/dreamway.jpg';
+import globalcarsImg from '../assets/portfolio/globalcars.jpg';
+import litaxImg from '../assets/portfolio/litax.jpg';
+import hypnotherapyImg from '../assets/portfolio/hypnotherapy.jpg';
 
 const projects = [
   {
@@ -14,7 +18,7 @@ const projects = [
     href: 'https://dreamway-study.com/',
     description:
       'Educational agency for Korean university admissions — language courses, student visas, and full application support.',
-    image: `${base}portfolio/dreamway.jpg`,
+    image: dreamwayImg,
   },
   {
     title: 'Global Cars Korea',
@@ -24,7 +28,7 @@ const projects = [
     href: 'https://globalcarskorea.com/',
     description:
       'Used car export from South Korea to Europe and worldwide — sourcing, inspection, and logistics handled end-to-end.',
-    image: `${base}portfolio/globalcars.jpg`,
+    image: globalcarsImg,
   },
   {
     title: 'Long Island Tax Resolution',
@@ -34,7 +38,7 @@ const projects = [
     href: 'https://longislandtaxresolution.com/',
     description:
       'IRS tax resolution and representation firm serving clients across Long Island, New York.',
-    image: `${base}portfolio/litax.jpg`,
+    image: litaxImg,
   },
   {
     title: 'Hypnotherapy — Design Directions',
@@ -44,7 +48,7 @@ const projects = [
     href: 'https://7vred7.github.io/hypnotherapy-demo/',
     description:
       'Three landing page design directions for a hypnotherapy practice. Built with Astro, deployed on GitHub Pages.',
-    image: `${base}portfolio/hypnotherapy.jpg`,
+    image: hypnotherapyImg,
   },
 ];
 
@@ -88,9 +92,13 @@ const stackLabel = {
           >
             <div class="portfolio-tilt-inner">
               <div class="portfolio-thumb">
-                <img
+                <Image
                   src={p.image}
                   alt={p.title + ' — cover'}
+                  widths={[400, 800, 1200]}
+                  sizes="(min-width: 1100px) 540px, (min-width: 700px) 90vw, 100vw"
+                  format="webp"
+                  quality={80}
                   loading="lazy"
                   class="portfolio-thumb-img"
                 />

@@ -1,13 +1,26 @@
 ---
 import '../styles/header.css';
+
+// Base URL prefix — normalized to always end with a slash.
+const baseRaw = import.meta.env.BASE_URL ?? '/';
+const base = baseRaw.endsWith('/') ? baseRaw : baseRaw + '/';
 ---
 
-<header class="site-header" id="site-header">
-  <a href="/" class="header-logo" aria-label="Iris Web — home">
+<header
+  class="site-header"
+  id="site-header"
+  style={`--logo-url: url('${base}logo.png');`}
+>
+  <a href={base} class="header-logo" aria-label="Iris Web — home">
     <span class="header-logo-img" role="img" aria-label="Iris Web"></span>
   </a>
 
-  <button class="header-menu-trigger" aria-label="Open menu" aria-expanded="false" data-menu-trigger>
+  <button
+    class="header-menu-trigger"
+    aria-label="Open menu"
+    aria-expanded="false"
+    data-menu-trigger
+  >
     <span class="header-menu-trigger-text">Menu</span>
     <span class="header-menu-trigger-icon" aria-hidden="true">
       <span></span>

@@ -1,5 +1,9 @@
 .portfolio {
   background: var(--color-bg);
+
+  /* Local easing tokens — smooth expo-out + slight overshoot for springiness */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ---------- Filters ---------- */
@@ -20,7 +24,10 @@
   border: 1px solid var(--color-border);
   border-radius: 999px;
   cursor: pointer;
-  transition: all 0.3s var(--ease-out-quart);
+  transition:
+    color 0.4s var(--ease-smooth),
+    border-color 0.4s var(--ease-smooth),
+    transform 0.4s var(--ease-smooth);
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -32,7 +39,7 @@
   inset: 0;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-violet) 100%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.45s var(--ease-smooth);
   z-index: -1;
 }
 
@@ -113,19 +120,24 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition:
-    transform 0.4s var(--ease-out-quart),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+
+  /* Promote to its own GPU composite layer — keeps motion at 60fps */
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+
+  transition:
+    transform 0.6s var(--ease-smooth),
+    border-color 0.6s var(--ease-smooth),
+    box-shadow 0.6s var(--ease-smooth);
 }
 
 .portfolio-card:hover .portfolio-tilt-inner {
-  transform: translateY(-6px);
+  transform: translate3d(0, -8px, 0) scale(1.006);
   border-color: color-mix(in srgb, var(--card-accent) 50%, transparent);
   box-shadow:
-    0 24px 70px var(--card-glow),
+    0 28px 80px var(--card-glow),
     0 0 0 1px color-mix(in srgb, var(--card-accent) 20%, transparent);
 }
 
@@ -140,16 +152,16 @@
     rgba(255, 255, 255, 0.08) 50%,
     transparent 70%
   );
-  background-size: 220% 100%;
-  background-position: 100% 0;
-  transition: background-position 0.9s ease;
+  background-size: 250% 100%;
+  background-position: 120% 0;
+  transition: background-position 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
   pointer-events: none;
   z-index: 5;
   mix-blend-mode: overlay;
 }
 
 .portfolio-card:hover .portfolio-tilt-inner::after {
-  background-position: -120% 0;
+  background-position: -130% 0;
 }
 
 /* ---------- Thumbnail ---------- */
@@ -169,14 +181,14 @@
   object-position: top center;
   display: block;
   z-index: 1;
-  transition:
-    transform 0.7s var(--ease-out-quart),
-    filter 0.4s ease;
+  /* Idle: slight desaturation and dimming — colors wake up on hover */
+  filter: saturate(0.85) brightness(0.94) contrast(0.98);
+  transition: filter 0.75s var(--ease-smooth);
 }
 
 .portfolio-card:hover .portfolio-thumb-img {
-  transform: scale(1.05);
-  filter: brightness(1.05) saturate(1.08);
+  /* No scale — keeps the screenshot intact, no cropping */
+  filter: saturate(1.08) brightness(1.04) contrast(1.02);
 }
 
 /* Gradient overlay — adds depth, makes badge/domain text readable */
@@ -206,12 +218,16 @@
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid color-mix(in srgb, var(--card-accent) 40%, transparent);
   border-radius: 999px;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition:
+    background 0.55s var(--ease-smooth),
+    border-color 0.55s var(--ease-smooth),
+    transform 0.55s var(--ease-smooth);
 }
 
 .portfolio-card:hover .portfolio-thumb-badge {
   background: color-mix(in srgb, var(--card-accent) 25%, rgba(10, 10, 20, 0.65));
   border-color: var(--card-accent);
+  transform: translateY(-1px);
 }
 
 /* Domain label — bottom-left corner of image */
@@ -244,11 +260,16 @@
     transparent 100%
   );
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transform: scaleX(0.3);
+  transform-origin: center;
+  transition:
+    opacity 0.55s var(--ease-smooth),
+    transform 0.7s var(--ease-smooth);
 }
 
 .portfolio-card:hover .portfolio-thumb::before {
   opacity: 1;
+  transform: scaleX(1);
 }
 
 /* ---------- Info area ---------- */
@@ -266,7 +287,7 @@
   line-height: 1.25;
   margin: 0 0 0.6rem;
   color: var(--color-text);
-  transition: color 0.3s ease;
+  transition: color 0.45s var(--ease-smooth);
 }
 
 .portfolio-card:hover .portfolio-title {
@@ -289,12 +310,13 @@
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--card-accent);
-  transition: gap 0.3s var(--ease-out-quart);
+  transition: gap 0.5s var(--ease-smooth);
   align-self: flex-start;
 }
 
 .portfolio-link svg {
-  transition: transform 0.3s var(--ease-out-quart);
+  /* Springy easing for the arrow — small overshoot adds personality */
+  transition: transform 0.55s var(--ease-spring);
 }
 
 .portfolio-card:hover .portfolio-link {
@@ -311,7 +333,7 @@
     transform: none;
   }
   .portfolio-card:hover .portfolio-thumb-img {
-    transform: none;
+    filter: none;
   }
   .portfolio-tilt-inner::after {
     display: none;

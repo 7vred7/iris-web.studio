@@ -35,8 +35,9 @@
   height: 50px;
 
   background-color: var(--logo-color);
-  -webkit-mask: url('/logo.png') left center / contain no-repeat;
-  mask: url('/logo.png') left center / contain no-repeat;
+  /* --logo-url is inherited from .site-footer (set inline in Footer.astro). */
+  -webkit-mask: var(--logo-url) left center / contain no-repeat;
+  mask: var(--logo-url) left center / contain no-repeat;
 
   transition: background-color 0.25s ease;
 }

@@ -52,8 +52,10 @@
   height: 32px;
 
   background-color: var(--logo-color);
-  -webkit-mask: url('/logo.png') left center / contain no-repeat;
-  mask: url('/logo.png') left center / contain no-repeat;
+  /* --logo-url is inherited from .site-header (set inline in Header.astro
+     using the BASE_URL prefix). No fallback needed — inline style is always set. */
+  -webkit-mask: var(--logo-url) left center / contain no-repeat;
+  mask: var(--logo-url) left center / contain no-repeat;
 
   transition: background-color 0.25s ease, transform 0.25s ease;
 }
