@@ -27,7 +27,30 @@ import '../styles/contact.css';
       </ul>
     </div>
 
-    <form class="contact-form" data-contact-form data-reveal data-reveal-delay="200">
+    <form
+      class="contact-form"
+      data-contact-form
+      data-reveal
+      data-reveal-delay="200"
+      action="https://formspree.io/f/mjgldnjr"
+      method="POST"
+    >
+      <!--
+        Honeypot — hidden from humans, fills only if a bot submits the form.
+        Wrapped in a display:none div so browser autofill / password managers
+        won't 'discover' the field via off-screen positioning tricks.
+      -->
+      <div style="display:none" aria-hidden="true">
+        <label for="hp-field">Don't fill this out if you're human</label>
+        <input
+          id="hp-field"
+          type="text"
+          name="_gotcha"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+
       <div class="form-row">
         <label for="name" class="sr-only">Name</label>
         <input id="name" name="name" type="text" placeholder="Your name" required />

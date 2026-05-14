@@ -216,23 +216,72 @@ function initContactForm() {
   const note = document.querySelector('[data-form-note]');
   if (!form || !note) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(form).entries());
 
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'contact_form_submit',
-        formName: 'main_contact',
-        name: data.name,
-        email: data.email,
-      });
+    const endpoint = form.action;
+
+    // Refuse to send if the placeholder hasn't been replaced
+    if (!endpoint || endpoint.includes('REPLACE_WITH_YOUR_FORM_ID')) {
+      note.textContent =
+        'Form endpoint not configured yet. Replace the Formspree ID in Contact.astro.';
+      note.className = 'form-note is-error';
+      return;
     }
 
-    note.textContent =
-      "Thanks! Hook this form up to a backend, Formspree, or Netlify Forms to receive submissions.";
-    note.className = 'form-note is-success';
-    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    note.textContent = '';
+    note.className = 'form-note';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // Honeypot — if filled, a bot submitted; silently bail out
+    if (data._gotcha) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      return;
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        note.textContent = "Thanks! We'll get back to you within one business day.";
+        note.className = 'form-note is-success';
+        form.reset();
+
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'contact_form_submit',
+            formName: 'main_contact',
+          });
+        }
+      } else {
+        const json = await response.json().catch(() => ({}));
+        const errorMsg =
+          json?.errors?.[0]?.message ||
+          'Something went wrong. Please email us at 7vred7@gmail.com directly.';
+        note.textContent = errorMsg;
+        note.className = 'form-note is-error';
+      }
+    } catch (err) {
+      note.textContent =
+        'Network error. Please try again or email us at 7vred7@gmail.com directly.';
+      note.className = 'form-note is-error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
   });
 }
 
